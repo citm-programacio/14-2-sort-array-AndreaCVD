@@ -48,21 +48,43 @@ public:
     }
 
     void recursivePrint(Node* n) {
-
         if (n == nullptr) {
             cout << endl;
             return;
         }
 
-        cout << n->value << " ";
+        // Recursively call the function for the next node first
         recursivePrint(n->next);
 
+        // Print the current node value after recursion
+        cout << n->value << " ";
     }
 
 
     int getSize() {
         return size;
     }
+
+    // Recursive function to delete the entire list
+    void deleteList(Node* n) {
+        if (n == nullptr) {
+            return; // Base case: if the node is nullptr, stop recursion
+        }
+
+        // Recursively delete the next node first
+        deleteList(n->next);
+
+        // After the recursive call returns, delete the current node
+        delete n;
+    }
+
+    // Public method to call the recursive deleteList function from the head
+    void deleteList() {
+        deleteList(head);
+        head = nullptr; // After deletion, the list should be empty
+        size = 0; // Reset size to 0
+    }
+
 };
 
 int main() {
