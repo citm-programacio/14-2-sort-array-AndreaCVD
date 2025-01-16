@@ -1,5 +1,61 @@
-// Given this single-linked list data structure class, implement a delete function that uses recursion to erase the whole data structure.
+//Implement the most basic sorting algorithm on a fixed array:
+//go through the whole array, find the smallest element, copy into a new array.
+//
+//Find some strategy to mark or remove the copied element from the original, and do the loop again.You can assume that all the elements are greater than zero.
+//
+//You can also use recursion or use a different sorting strategy.
 
+#include <iostream>
+using namespace std;
+
+const int arraySize = 10;
+
+void mysort(int* unsorted, int*& sorted) {
+    bool processed[arraySize] = { false };  // This array tracks whether elements are processed
+
+    for (int i = 0; i < arraySize; i++) {
+        int minIndex = -1;
+        int minValue = 999999;  // A large number to find the minimum value
+
+        // Find the smallest element in the unsorted array that hasn't been processed yet
+        for (int j = 0; j < arraySize; j++) {
+            if (!processed[j] && unsorted[j] < minValue) {
+                minValue = unsorted[j];
+                minIndex = j;
+            }
+        }
+
+        // Copy the smallest element into the sorted array
+        sorted[i] = minValue;
+
+        // Mark this element as processed
+        processed[minIndex] = true;
+    }
+}
+
+void printArray(const int* a, int size) {
+    for (int i = 0; i < size; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int u[10]{ 0,8,1,2,4,5,5,9,20,15 };
+    int* s = new int[10];
+
+    printArray(u, arraySize);
+
+    mysort(u, s);
+    printArray(s, arraySize);
+
+    delete[] s;
+}
+
+
+
+// Given this single-linked list data structure class, implement a delete function that uses recursion to erase the whole data structure.
+/*
 #include <iostream>
 using namespace std;
 
@@ -97,3 +153,4 @@ int main() {
     cout << "Size: " << list.getSize() << endl; // Output: Size: 3
     return 0;
 }
+*/
